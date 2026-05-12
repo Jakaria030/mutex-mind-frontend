@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router";
 
 // Layouts
-import MainLayout from "./layouts/MainLayout";
-import AdminLayout from "./layouts/AdminLayout";
+import MainLayout from "./layouts/MainLayout/MainLayout";
+import AdminLayout from "./layouts/AdminLayout/AdminLayout";
 
 // Main Pages
 import Home from "./pages/main/Home/Home";
