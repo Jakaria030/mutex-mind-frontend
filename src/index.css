@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+@import "tailwindcss";
+
+/* Fonts and Colors set */
+@theme {
+    /* fonts */
+    --font-jetbrains: "JetBrains Mono", monospace;
+    --font-dm: "DM Sans", sans-serif;
+
+    /* colors */
+    --color-bg-white: #FFFFFF;
+    --color-border1: #DDE2ED;
+    --color-border2: #C8D0E2;
+    --color-light-green: #00C896;
+    --color-dark-green: #009E78;
+    --color-bg-green: #E6FBF4;
+    --color-light-purple: #7B5EA7;
+    --color-bg-purple: #F0EBF9;
+    --color-amber: #F5A623;
+    --color-blue: #3B82F6;
+    --color-navy: #0A0E1A;
+    --color-text1: #0D1220;
+    --color-text2: #4A5568;
+    --color-text3: #8899BB;
+}
