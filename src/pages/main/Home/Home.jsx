@@ -1,3 +1,4 @@
+import Qoute from "./components/Qoute";
 import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
 
@@ -6,6 +7,7 @@ const Home = () => {
         <>
             <Hero />
             <HowItWorks />
+            <Qoute />
         </>
     );
 };
