@@ -1,4 +1,4 @@
-const MutexMindLogo = () => {
+const MutexMindLogo = ({ color = "#000000" }) => {
   return (
     <svg width="220" height="50" viewBox="0 0 300 70">
       <rect x="7" y="9" width="52" height="52" rx="8" fill="#0D1220" stroke="#00E5A0" strokeWidth="1.5" />
@@ -21,7 +21,7 @@ const MutexMindLogo = () => {
 
       {/* Text */}
       <text x="80" y="46" fontFamily="'Courier New', monospace" fontSize="38" fontWeight="700">
-        <tspan fill="#000000">Mutex</tspan>
+        <tspan fill={color}>Mutex</tspan>
         <tspan fill="#00E5A0" dx="10">Mind</tspan>
       </text>
     </svg>
