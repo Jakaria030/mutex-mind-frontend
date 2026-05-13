@@ -14,7 +14,7 @@ const Navbar = () => {
     };
 
     return (
-        <header className="w-full border-b border-border-1 bg-white relative">
+        <header className="w-full border-b border-border-1 bg-white sticky top-0 z-50">
             <nav className="max-w-5xl mx-auto px-2 sm:px-4 h-16 flex items-center justify-between">
 
                 {/* Logo */}
