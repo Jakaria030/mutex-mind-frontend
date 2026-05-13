@@ -20,7 +20,7 @@ const MutexMindLogo = ({ color = "#000000" }) => {
       <circle cx="33" cy="66" r="2.5" fill="#00E5A0" />
 
       {/* Text */}
-      <text x="80" y="46" fontFamily="'Courier New', monospace" fontSize="38" fontWeight="700">
+      <text x="80" y="46" fontFamily="'DM Sans', sans-serif" fontSize="38" fontWeight="700">
         <tspan fill={color}>Mutex</tspan>
         <tspan fill="#00E5A0" dx="10">Mind</tspan>
       </text>
