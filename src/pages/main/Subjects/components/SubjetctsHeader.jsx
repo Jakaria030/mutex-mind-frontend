@@ -37,7 +37,7 @@ const SubjectsHeader = () => {
                 {/* Right Stats */}
                 <div className="grid grid-cols-2 gap-4 min-w-fit">
 
-                    <div className="border border-border-1 rounded-sm bg-bg-green px-5 py-4 min-w-[120px]">
+                    <div className="border border-border-1 rounded-sm bg-bg-green px-5 py-4 min-w-30">
 
                         <div className="flex items-center gap-2 text-light-green">
 
@@ -55,7 +55,7 @@ const SubjectsHeader = () => {
 
                     </div>
 
-                    <div className="border border-border-1 rounded-sm bg-white px-5 py-4 min-w-[120px]">
+                    <div className="border border-border-1 rounded-sm bg-white px-5 py-4 min-w-30">
 
                         <div className="flex items-center gap-2 text-text-2">
 
