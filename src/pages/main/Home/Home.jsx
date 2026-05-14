@@ -1,4 +1,4 @@
-import Qoute from "./components/Qoute";
+import Quote from "./components/Quote";
 import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
 
@@ -7,7 +7,7 @@ const Home = () => {
         <>
             <Hero />
             <HowItWorks />
-            <Qoute />
+            <Quote />
         </>
     );
 };

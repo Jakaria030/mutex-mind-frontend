@@ -25,7 +25,7 @@ const Footer = () => {
                         <MutexMindLogo color="#FFFFFF" />
                     </Link>
 
-                    <p className="max-w-xs mt-4 text-sm leading-6 text-text-3 font-dm">
+                    <p className="max-w-xs mt-4 text-md leading-6 text-text-3 font-dm">
                         Mutex Mind is a modern learning platform designed to help
                         students practice quizzes, improve skills, and track progress
                         efficiently.

@@ -1,6 +1,6 @@
 import { FaQuoteLeft } from "react-icons/fa";
 
-const Qoute = () => {
+const Quote = () => {
     return (
         <section className="bg-white py-8 md:py-16">
             <div className="max-w-5xl mx-auto px-2 sm:px-4">
@@ -35,4 +35,4 @@ const Qoute = () => {
     );
 };
 
-export default Qoute;
+export default Quote;
