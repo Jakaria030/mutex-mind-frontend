@@ -9,12 +9,11 @@ import Home from "./pages/main/Home/Home";
 import Subjects from "./pages/main/Subjects/Subjects";
 import Leaderboard from "./pages/main/Leaderboard/Leaderboard";
 import Contact from "./pages/main/Contact/Contact";
-import Login from "./pages/Auth/Login";
+import Register from "./pages/main/Auth/Register";
+import Login from "./pages/main/Auth/Login";
 
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard/Dashboard";
-import Register from "./pages/Auth/Register";
-
 
 
 const App = () => {
