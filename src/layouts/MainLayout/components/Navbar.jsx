@@ -1,16 +1,29 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
 
 import MutexMindLogo from "../../../components/MutexMindLogo";
+import { useAuth } from "../../../context/AuthContext";
 
 const Navbar = () => {
+    const { user, logout } = useAuth();
     const [open, setOpen] = useState(false);
 
+    const navigate = useNavigate();
 
     // Nav class style
     const navClass = ({ isActive }) => {
         return isActive ? "text-light-green font-semibold" : "hover:text-light-green transition";
+    };
+
+    // Handle logout
+    const handleLogout = async () => {
+        try {
+            await logout();
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -53,19 +66,41 @@ const Navbar = () => {
 
                 {/* Buttons (Desktop) */}
                 <div className="hidden md:flex items-center gap-2">
-                    <Link
-                        to="/login"
-                        className="px-3 py-2 text-center rounded-sm font-medium border border-border-2 text-text-2 hover:border-light-green hover:text-light-green transition"
-                    >
-                        Login
-                    </Link>
+                    {
+                        user ? (
+                            <>
+                                <Link
+                                    to="/profile"
+                                    className="w-10 h-10 rounded-full bg-light-green text-white flex items-center justify-center text-sm font-bold uppercase hover:bg-dark-green transition"
+                                >
+                                    {user?.name?.charAt(0)}
+                                </Link>
+                                <button
+                                    onClick={handleLogout}
+                                    className="px-4 py-2 text-center rounded-sm bg-light-green text-white font-medium hover:bg-dark-green transition"
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <Link
+                                    to="/login"
+                                    className="px-3 py-2 text-center rounded-sm font-medium border border-border-2 text-text-2 hover:border-light-green hover:text-light-green transition"
+                                >
+                                    Login
+                                </Link>
 
-                    <Link
-                        to="/subjects"
-                        className="px-4 py-2 text-center rounded-sm bg-light-green text-white font-medium hover:bg-dark-green transition"
-                    >
-                        Start Now
-                    </Link>
+                                <Link
+                                    to="/subjects"
+                                    className="px-4 py-2 text-center rounded-sm bg-light-green text-white font-medium hover:bg-dark-green transition"
+                                >
+                                    Start Now
+                                </Link>
+                            </>
+                        )
+                    }
+
                 </div>
 
                 {/* Hamburger (Mobile+Tablet) */}
@@ -107,21 +142,45 @@ const Navbar = () => {
                         </li>
 
                         <div className="flex gap-2 pt-2">
-                            <Link
-                                to="/login"
-                                onClick={() => setOpen(false)}
-                                className="flex-1 px-3 py-2 text-center rounded-sm border border-border-2 text-text-2"
-                            >
-                                Login
-                            </Link>
-
-                            <Link
-                                to="/subjects"
-                                onClick={() => setOpen(false)}
-                                className="flex-1 px-3 py-2 text-center rounded-sm bg-light-green text-white"
-                            >
-                                Start Now
-                            </Link>
+                            {
+                                user ? (
+                                    <>
+                                        <Link
+                                            to="/profile"
+                                            onClick={() => setOpen(false)}
+                                            className="flex-1 px-3 py-2 text-center rounded-sm border border-border-2 text-text-2"
+                                        >
+                                            Hi, {user?.name?.split(" ")[0]}
+                                        </Link>
+                                        <button
+                                            onClick={() => {
+                                                handleLogout();
+                                                setOpen(false);
+                                            }}
+                                            className="flex-1 px-3 py-2 text-center rounded-sm bg-light-green text-white"
+                                        >
+                                            Logout
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Link
+                                            to="/login"
+                                            onClick={() => setOpen(false)}
+                                            className="flex-1 px-3 py-2 text-center rounded-sm border border-border-2 text-text-2"
+                                        >
+                                            Login
+                                        </Link>
+                                        <Link
+                                            to="/subjects"
+                                            onClick={() => setOpen(false)}
+                                            className="flex-1 px-3 py-2 text-center rounded-sm bg-light-green text-white"
+                                        >
+                                            Start Now
+                                        </Link>
+                                    </>
+                                )
+                            }
                         </div>
                     </ul>
                 </div>
