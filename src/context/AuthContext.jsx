@@ -59,11 +59,18 @@ export const AuthProvider = ({ children }) => {
 
     // Load user
     const loadUser = async () => {
+        const token = localStorage.getItem("accessToken");
+        if (!token) {
+            setLoading(false);
+            return;
+        }
+
         try {
-            if (!localStorage.getItem("accessTokan")) return;
             const res = await getProfile();
             setUser(res?.data?.user);
-        } catch (err) {
+        } catch {
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
             setUser(null);
         } finally {
             setLoading(false);

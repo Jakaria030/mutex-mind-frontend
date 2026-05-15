@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import LeftRightBox from "./components/LeftRightBox";
 import { useAuth } from "../../../context/AuthContext";
 import { useState } from "react";
@@ -13,6 +13,7 @@ const Login = () => {
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     // Handle change form value
     const handleChange = (e) => {
@@ -26,11 +27,13 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const from = location.state?.from?.pathname || "/";
+
         setLoading(true);
         setError("");
         try {
             await login(form);
-            navigate("/");
+            navigate(from, { replace: true });
         } catch (err) {
             setError(
                 err.response?.data?.message || "Something went wrong"
