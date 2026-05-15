@@ -9,10 +9,11 @@ import Home from "./pages/main/Home/Home";
 import Subjects from "./pages/main/Subjects/Subjects";
 import Leaderboard from "./pages/main/Leaderboard/Leaderboard";
 import Contact from "./pages/main/Contact/Contact";
-import Login from "./pages/main/Login/Login";
+import Login from "./pages/Auth/Login";
 
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard/Dashboard";
+import Register from "./pages/Auth/Register";
 
 
 
@@ -25,6 +26,7 @@ const App = () => {
                 <Route path="/subjects" element={<Subjects />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
             </Route>
 
