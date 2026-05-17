@@ -14,6 +14,11 @@ import Login from "./pages/main/Auth/Login";
 
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard/Dashboard";
+import AddSubject from "./pages/admin/AddSubject/AddSubject";
+import AddExam from "./pages/admin/AddExam/AddExam";
+import AddQuestions from "./pages/admin/AddQuestions/AddQuestions";
+import Users from "./pages/admin/Users/Users";
+import Settings from "./pages/admin/Settings/Settings";
 
 
 const App = () => {
@@ -35,6 +40,11 @@ const App = () => {
                 element={<AdminLayout />}
             >
                 <Route index element={<Dashboard />} />
+                <Route path="add-subject" element={<AddSubject />} />
+                <Route path="add-exam" element={<AddExam />} />
+                <Route path="add-questions" element={<AddQuestions />} />
+                <Route path="users" element={<Users />} />
+                <Route path="settings" element={<Settings />} />
             </Route>
         </Routes>
     );
