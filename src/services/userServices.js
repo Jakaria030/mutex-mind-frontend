@@ -29,3 +29,14 @@ export const changeUserPassword = async (payload) => {
     const res = await api.patch("/users/change-password", payload);
     return res.data;
 };
+
+// For admin use
+export const getAllUser = async () => {
+    const res = await api.get("/users");
+    return res.data;
+};
+
+export const toggleActiveStatus = async (id) => {
+    const res = await api.patch(`/users/toggle-status/${id}`);
+    return res.data;
+};

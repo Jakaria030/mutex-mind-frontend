@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router";
+import { Link, Navigate, NavLink, useNavigate } from "react-router";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
 
 import MutexMindLogo from "../../../components/MutexMindLogo";
@@ -25,6 +25,15 @@ const Navbar = () => {
             console.log(error);
         }
     };
+
+    // Handle profile navigate
+    const handleProfileNavigate = () => {
+        if (user && user.role === "admin") {
+            navigate("/admin");
+        } else {
+            navigate("/profile");
+        }
+    }
 
     return (
         <header className="w-full border-b border-border-1 bg-white sticky top-0 z-50">
@@ -69,15 +78,15 @@ const Navbar = () => {
                     {
                         user ? (
                             <>
-                                <Link
-                                    to="/profile"
-                                    className="w-10 h-10 rounded-full bg-light-green text-white flex items-center justify-center text-sm font-bold uppercase hover:bg-dark-green transition"
+                                <button
+                                    onClick={handleProfileNavigate}
+                                    className="w-10 h-10 cursor-pointer rounded-full bg-light-green text-white flex items-center justify-center text-sm font-bold uppercase hover:bg-dark-green transition"
                                 >
                                     {user?.name?.charAt(0)}
-                                </Link>
+                                </button>
                                 <button
                                     onClick={handleLogout}
-                                    className="px-4 py-2 text-center rounded-sm bg-light-green text-white font-medium hover:bg-dark-green transition"
+                                    className="px-4 py-2 cursor-pointer text-center rounded-sm bg-light-green text-white font-medium hover:bg-dark-green transition"
                                 >
                                     Logout
                                 </button>
@@ -145,19 +154,22 @@ const Navbar = () => {
                             {
                                 user ? (
                                     <>
-                                        <Link
-                                            to="/profile"
+                                        <button
                                             onClick={() => setOpen(false)}
-                                            className="flex-1 px-3 py-2 text-center rounded-sm border border-border-2 text-text-2"
+                                            onClick={() => {
+                                                setOpen(false);
+                                                handleProfileNavigate();
+                                            }}
+                                            className="flex-1 px-3 py-2 text-center cursor-pointer rounded-sm border border-border-2 text-text-2"
                                         >
                                             Hi, {user?.name?.split(" ")[0]}
-                                        </Link>
+                                        </button>
                                         <button
                                             onClick={() => {
                                                 handleLogout();
                                                 setOpen(false);
                                             }}
-                                            className="flex-1 px-3 py-2 text-center rounded-sm bg-light-green text-white"
+                                            className="flex-1 px-3 py-2 text-center cursor-pointer rounded-sm bg-light-green text-white"
                                         >
                                             Logout
                                         </button>

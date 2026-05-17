@@ -1,19 +1,23 @@
 import { FaSignOutAlt } from "react-icons/fa";
 import MutexMindLogo from "../../../components/MutexMindLogo";
+import { Link, useNavigate } from "react-router";
+import { useAuth } from "../../../context/AuthContext";
+import LiveDateTime from "./LiveDateTime";
 
 const AdminTopbar = () => {
+    const { user, logout } = useAuth();
 
-    const currentDate = new Date().toLocaleString("en-US", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-    });
+    const navigate = useNavigate();
 
-    const user = {
-        name: "Jakaria",
+
+    // Handle logout
+    const handleLogout = async () => {
+        try {
+            await logout();
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -23,12 +27,12 @@ const AdminTopbar = () => {
             <div className="flex items-center gap-10">
 
                 {/* Logo */}
-                <MutexMindLogo />
+                <Link to="/">
+                    <MutexMindLogo />
+                </Link>
 
-                {/* Date */}
-                <p className="text-sm font-medium text-text-2">
-                    {currentDate}
-                </p>
+                {/* Live date time*/}
+                <LiveDateTime />
 
             </div>
 
@@ -36,14 +40,15 @@ const AdminTopbar = () => {
             <div className="flex items-center gap-4">
 
                 {/* Avatar */}
-                <button
-                    className="w-10 h-10 rounded-full bg-light-green text-white flex items-center justify-center text-sm font-bold uppercase"
+                <div
+                    className="rounded-sm border-light-green text-text-1 flex items-center justify-center text-sm font-medium capitalize"
                 >
-                    {user?.name?.charAt(0)}
-                </button>
+                    Hi, {user?.name}
+                </div>
 
                 {/* Logout */}
                 <button
+                    onClick={handleLogout}
                     className="flex items-center gap-2 px-4 h-10 rounded-sm cursor-pointer border border-border-1 text-sm font-medium text-text-2 hover:border-red-400 hover:text-red-500 transition"
                 >
                     <FaSignOutAlt size={13} />

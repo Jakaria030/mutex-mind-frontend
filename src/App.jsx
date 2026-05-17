@@ -13,6 +13,7 @@ import Register from "./pages/main/Auth/Register";
 import Login from "./pages/main/Auth/Login";
 
 // Admin Pages
+import AdminRoute from "./routes/AdminRoute";
 import Dashboard from "./pages/admin/Dashboard/Dashboard";
 import AddSubject from "./pages/admin/AddSubject/AddSubject";
 import AddExam from "./pages/admin/AddExam/AddExam";
@@ -37,7 +38,9 @@ const App = () => {
             {/* ================= ADMIN PANEL ================= */}
             <Route
                 path="/admin"
-                element={<AdminLayout />}
+                element={<AdminRoute>
+                    <AdminLayout />
+                </AdminRoute>}
             >
                 <Route index element={<Dashboard />} />
                 <Route path="add-subject" element={<AddSubject />} />

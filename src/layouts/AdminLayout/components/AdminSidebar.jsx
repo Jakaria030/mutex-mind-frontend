@@ -44,7 +44,7 @@ const AdminSidebar = () => {
     ];
 
     return (
-        <aside className="w-64 min-h-[calc(100vh-64px)] border-r border-border-1 bg-white p-4">
+        <aside className="w-64 min-h-[calc(100vh-64px)] border-r border-border-1 bg-white p-4 fixed">
 
             <nav className="space-y-2">
 
