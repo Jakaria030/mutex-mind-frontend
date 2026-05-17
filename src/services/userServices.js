@@ -30,7 +30,7 @@ export const changeUserPassword = async (payload) => {
     return res.data;
 };
 
-// For admin use
+// ========== Only For Admin ==========
 export const getAllUser = async () => {
     const res = await api.get("/users");
     return res.data;
