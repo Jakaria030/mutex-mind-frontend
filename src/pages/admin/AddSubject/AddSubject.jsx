@@ -5,14 +5,13 @@ import AddSubjectForm from "./components/AddSubjectForm";
 import SubjectCard from "./components/SubjectCard";
 import NoDataFound from "../../../components/NoDataFound";
 import Spinner from "../../../components/Spinner";
-import { getAllSubjects, publishSubject } from "../../../services/subjectServices";
+import { publishSubject } from "../../../services/subjectServices";
+import useSubjects from "../../../hooks/useSubjects";
 
 
 const AddSubject = () => {
-    const [subjects, setSubjects] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const { subjects, setSubjects, loading } = useSubjects();
     const [editedData, setEditedData] = useState(null);
-
     const [searchTerm, setSearchTerm] = useState("");
 
 
@@ -40,21 +39,6 @@ const AddSubject = () => {
     const handleEdit = async (data) => {
         setEditedData(data);
     }
-
-    // Load all subjects
-    const loadSubjects = async () => {
-        setLoading(true);
-        try {
-            const res = await getAllSubjects();
-            setSubjects(res?.data?.subjects);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        loadSubjects();
-    }, []);
 
     // Search subject
     const filteredSubjects = subjects?.filter((subject) =>
@@ -133,7 +117,7 @@ const AddSubject = () => {
                 {/* Add Form */}
                 <AddSubjectForm
                     subjects={subjects}
-                    onSetSubjects={setSubjects}
+                    setSubjects={setSubjects}
                     editedData={editedData}
                     onEditedData={setEditedData}
                 />

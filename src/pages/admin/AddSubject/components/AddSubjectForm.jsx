@@ -3,6 +3,7 @@ import { FaPlus } from "react-icons/fa";
 import { generateSlug } from "../../../../utils";
 import ErrorMessage from "../../../../components/ErrorMessage";
 import { createSubject, updateSubject } from "../../../../services/subjectServices";
+import useSubjects from "../../../../hooks/useSubjects";
 
 const initialForm = {
     name: "",
@@ -12,7 +13,7 @@ const initialForm = {
     iconName: "",
 };
 
-const AddSubjectForm = ({ subjects, onSetSubjects, editedData, onEditedData }) => {
+const AddSubjectForm = ({ subjects, setSubjects, editedData, onEditedData }) => {
     const [form, setForm] = useState(initialForm);
     const [slugError, setSlugError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -36,18 +37,15 @@ const AddSubjectForm = ({ subjects, onSetSubjects, editedData, onEditedData }) =
         try {
             if (editedData) {
                 const res = await updateSubject(editedData._id, form);
-                onSetSubjects((prev) =>
-                    prev.map((subject) =>
-                        subject._id === editedData._id
-                            ? { ...subject, ...res.data.subject }
-                            : subject
-                    )
+
+                setSubjects((prev) =>
+                    prev.map((subject) => subject._id === editedData._id ? { ...subject, ...res.data.subject } : subject)
                 );
-                
+
                 onEditedData(null);
             } else {
                 const res = await createSubject(form);
-                onSetSubjects((prev) => [
+                setSubjects((prev) => [
                     ...prev,
                     res.data.subject,
                 ]);
