@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { generateSlug } from "../../../../utils";
 import ErrorMessage from "../../../../components/ErrorMessage";
-import { createSubject } from "../../../../services/subjectServices";
+import { createSubject, updateSubject } from "../../../../services/subjectServices";
 
 const initialForm = {
     name: "",
@@ -12,11 +12,12 @@ const initialForm = {
     iconName: "",
 };
 
-const AddSubjectForm = ({ subjects, onSetSubjects }) => {
+const AddSubjectForm = ({ subjects, onSetSubjects, editedData, onEditedData }) => {
     const [form, setForm] = useState(initialForm);
     const [slugError, setSlugError] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+
 
     // Handle form value change
     const handleChange = (e) => {
@@ -33,8 +34,24 @@ const AddSubjectForm = ({ subjects, onSetSubjects }) => {
         setLoading(true);
         setError("");
         try {
-            const res = await createSubject(form);
-            onSetSubjects([...subjects, res?.data?.subject]);
+            if (editedData) {
+                const res = await updateSubject(editedData._id, form);
+                onSetSubjects((prev) =>
+                    prev.map((subject) =>
+                        subject._id === editedData._id
+                            ? { ...subject, ...res.data.subject }
+                            : subject
+                    )
+                );
+                
+                onEditedData(null);
+            } else {
+                const res = await createSubject(form);
+                onSetSubjects((prev) => [
+                    ...prev,
+                    res.data.subject,
+                ]);
+            }
             setForm(initialForm);
         } catch (err) {
             setError(
@@ -45,6 +62,7 @@ const AddSubjectForm = ({ subjects, onSetSubjects }) => {
         }
     };
 
+    // Slug auto type when name input
     useEffect(() => {
         setForm((prev) => ({
             ...prev,
@@ -52,12 +70,11 @@ const AddSubjectForm = ({ subjects, onSetSubjects }) => {
         }));
     }, [form.name]);
 
-    // CHECK SLUG EXISTS
+    // Slug check
     useEffect(() => {
 
         const slugExists = subjects.some(
-            (subject) =>
-                subject.slug.toLowerCase() === form.slug.toLowerCase()
+            (subject) => subject._id !== editedData?._id && subject.slug.toLowerCase() === form.slug.toLowerCase()
         );
 
         if (slugExists) {
@@ -67,6 +84,21 @@ const AddSubjectForm = ({ subjects, onSetSubjects }) => {
         }
 
     }, [form.slug, subjects]);
+
+    // Edit data initialize
+    useEffect(() => {
+
+        if (!editedData) return;
+
+        setForm({
+            name: editedData.name || "",
+            slug: editedData.slug || "",
+            category: editedData.category || "",
+            categoryColor: editedData.categoryColor || "#000000",
+            iconName: editedData.iconName || "",
+        });
+
+    }, [editedData]);
 
     return (
         <div>
@@ -201,7 +233,9 @@ const AddSubjectForm = ({ subjects, onSetSubjects }) => {
                         type="submit"
                         className="mt-4 w-full py-3 cursor-pointer rounded-sm bg-light-green text-white text-sm font-medium hover:bg-dark-green transition"
                     >
-                        {loading ? "Submitting..." : "Add Subject"}
+                        {
+                            loading ? editedData ? "Updating..." : "Submitting..." : editedData ? "Update Subject" : "Add Subject"
+                        }
                     </button>
 
                 </form>

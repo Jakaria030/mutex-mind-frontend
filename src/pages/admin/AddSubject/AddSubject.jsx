@@ -11,6 +11,7 @@ import { getAllSubjects, publishSubject } from "../../../services/subjectService
 const AddSubject = () => {
     const [subjects, setSubjects] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [editedData, setEditedData] = useState(null);
 
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -35,6 +36,11 @@ const AddSubject = () => {
         }
     };
 
+    // Handle edit subject
+    const handleEdit = async (data) => {
+        setEditedData(data);
+    }
+
     // Load all subjects
     const loadSubjects = async () => {
         setLoading(true);
@@ -52,7 +58,7 @@ const AddSubject = () => {
 
     // Search subject
     const filteredSubjects = subjects?.filter((subject) =>
-        subject.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        subject?.name?.toLowerCase().includes(searchTerm.trim().toLowerCase())
     );
 
     return (
@@ -115,7 +121,7 @@ const AddSubject = () => {
                                 ) : (
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         {filteredSubjects?.map((subject) => (
-                                            <SubjectCard key={subject._id} subject={subject} onPublish={handlePublish} />
+                                            <SubjectCard key={subject._id} subject={subject} onPublish={handlePublish} onEdit={handleEdit} />
                                         ))}
                                     </div>
                                 )
@@ -125,7 +131,12 @@ const AddSubject = () => {
                 }
 
                 {/* Add Form */}
-                <AddSubjectForm subjects={subjects} onSetSubjects={setSubjects} />
+                <AddSubjectForm
+                    subjects={subjects}
+                    onSetSubjects={setSubjects}
+                    editedData={editedData}
+                    onEditedData={setEditedData}
+                />
 
             </div>
 

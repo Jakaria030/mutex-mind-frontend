@@ -70,7 +70,7 @@ export const subjectIconMap = {
     FaLightbulb: <FaLightbulb size={20} />,
 };
 
-const SubjectCard = ({ subject, onPublish }) => {
+const SubjectCard = ({ subject, onPublish, onEdit }) => {
     return (
         <div
             className="group relative overflow-hidden rounded-sm border border-border-1 bg-white p-5 hover:border-light-green transition"
@@ -143,7 +143,7 @@ const SubjectCard = ({ subject, onPublish }) => {
 
                 {/* Edit */}
                 <button
-                    onClick={() => handleEdit(subject)}
+                    onClick={() => onEdit(subject)}
                     className="flex items-center cursor-pointer gap-2 px-3 py-2 text-xs font-medium rounded-sm border border-light-green bg-light-green text-white"
                 >
                     <FaEdit />
