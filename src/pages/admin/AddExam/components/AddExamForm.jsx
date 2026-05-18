@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { createExam, updateExam } from "../../../../services/examServices";
-import ErrorMessage from "../../../../components/ErrorMessage";
+import Message from "../../../../components/Message";
 
 const initialForm = {
     subject: "",
@@ -187,7 +187,7 @@ const AddExamForm = ({ subjects = [], setExams, editedData, setEditedData }) => 
 
                     </div>
 
-                    {error && <ErrorMessage error={error} />}
+                    {error && <Message type="error" message={error} />}
 
                     {/* Submit */}
                     <button

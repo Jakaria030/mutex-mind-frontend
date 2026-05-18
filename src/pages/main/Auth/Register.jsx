@@ -2,8 +2,7 @@ import { Link, useNavigate } from "react-router";
 import LeftRightBox from "./components/LeftRightBox";
 import { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
-import ErrorMessage from "../../../components/ErrorMessage";
-
+import Message from "../../../components/Message";
 const Register = () => {
     const { register } = useAuth();
     const [form, setForm] = useState({
@@ -88,7 +87,7 @@ const Register = () => {
                             {loading ? "Register..." : "Register"}
                         </button>
 
-                        {error && <ErrorMessage error={error} />}
+                        {error && <Message type="error" message={error} />}
                     </form>
 
                     <p className="text-xs text-text-3 mt-4 text-center">

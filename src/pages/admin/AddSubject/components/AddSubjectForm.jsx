@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { generateSlug } from "../../../../utils";
-import ErrorMessage from "../../../../components/ErrorMessage";
 import { createSubject, updateSubject } from "../../../../services/subjectServices";
 import useSubjects from "../../../../hooks/useSubjects";
+import Message from "../../../../components/Message";
 
 const initialForm = {
     name: "",
@@ -157,7 +157,7 @@ const AddSubjectForm = ({ subjects, setSubjects, editedData, setEditedData }) =>
                         />
                     </div>
 
-                    {slugError && <ErrorMessage error={slugError} />}
+                    {slugError && <Message type="error" message={slugError} />}
 
                     {/* Category */}
                     <div className="mt-4">
@@ -222,7 +222,7 @@ const AddSubjectForm = ({ subjects, setSubjects, editedData, setEditedData }) =>
                         <p className="mt-2 text-xs text-text-3">
                             Example: FaCode, FaDatabase, FaLaptopCode
                         </p>
-                        {error && <ErrorMessage error={error} />}
+                        {error && <Message type="error" message={error} />}
                     </div>
 
 

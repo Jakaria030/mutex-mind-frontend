@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import LeftRightBox from "./components/LeftRightBox";
 import { useAuth } from "../../../context/AuthContext";
 import { useState } from "react";
-import ErrorMessage from "../../../components/ErrorMessage";
+import Message from "../../../components/Message";
 
 const Login = () => {
     const { login } = useAuth();
@@ -86,7 +86,7 @@ const Login = () => {
                             {loading ? "Login..." : "Login"}
                         </button>
 
-                        {error && <ErrorMessage error={error} />}
+                        {error && <Message type="error" message={error} />}
                     </form>
 
                     <p className="text-xs text-text-3 mt-4 text-center">
