@@ -119,7 +119,7 @@ const AddSubject = () => {
                     subjects={subjects}
                     setSubjects={setSubjects}
                     editedData={editedData}
-                    onEditedData={setEditedData}
+                    setEditedData={setEditedData}
                 />
 
             </div>

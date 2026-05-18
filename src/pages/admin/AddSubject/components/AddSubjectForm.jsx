@@ -13,7 +13,7 @@ const initialForm = {
     iconName: "",
 };
 
-const AddSubjectForm = ({ subjects, setSubjects, editedData, onEditedData }) => {
+const AddSubjectForm = ({ subjects, setSubjects, editedData, setEditedData }) => {
     const [form, setForm] = useState(initialForm);
     const [slugError, setSlugError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -42,7 +42,7 @@ const AddSubjectForm = ({ subjects, setSubjects, editedData, onEditedData }) => 
                     prev.map((subject) => subject._id === editedData._id ? { ...subject, ...res.data.subject } : subject)
                 );
 
-                onEditedData(null);
+                setEditedData(null);
             } else {
                 const res = await createSubject(form);
                 setSubjects((prev) => [
@@ -237,9 +237,7 @@ const AddSubjectForm = ({ subjects, setSubjects, editedData, onEditedData }) => 
                     </button>
 
                 </form>
-
             </div>
-
         </div>
     );
 };
